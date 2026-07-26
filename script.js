@@ -39,6 +39,24 @@ const questions = [
 let index = 0;
 let score = 0;
 
+function getEmoji(choiceText) {
+  const t = choiceText.toLowerCase();
+  if (t.includes('พระ') || t.includes('พุทธ') || t.includes('พระพุทธ')) return '🛕';
+  if (t.includes('ปีใหม่') || t.includes('เฉลิมฉลอง')) return '🎉';
+  if (t.includes('ข้าว') || t.includes('เก็บเกี่ยว')) return '🌾';
+  if (t.includes('น้ำ') || t.includes('โคม') || t.includes('ปล่อย')) return '💦';
+  if (t.includes('เผ็ด') || t.includes('พริก')) return '🌶️';
+  if (t.includes('เปรี้ยว') || t.includes('มะนาว')) return '🍋';
+  if (t.includes('หวาน')) return '🍯';
+  if (t.includes('เค็ม')) return '🧂';
+  if (t.includes('เทียน') || t.includes('ถวาย')) return '🕯️';
+  if (t.includes('ผ้า') || t.includes('ผ้าอาบ')) return '🧵';
+  if (t.includes('ไหว้') || t.includes('ค้อม')) return '🙏';
+  if (t.includes('มวย')) return '🥊';
+  if (t.includes('คาราเต้') || t.includes('เทควันโด')) return '🥋';
+  return '🔹';
+}
+
 function renderQuestion() {
   const q = questions[index];
   quizArea.innerHTML = '';
@@ -60,7 +78,8 @@ function renderQuestion() {
   q.choices.forEach((c, i) => {
     const btn = document.createElement('button');
     btn.className = 'choice';
-    btn.textContent = c;
+    const emoji = getEmoji(c);
+    btn.textContent = `${emoji} ${c}`;
     btn.addEventListener('click', () => selectAnswer(i, btn));
     choices.appendChild(btn);
   });
